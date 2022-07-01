@@ -1,0 +1,379 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2022-05-25 15:45:47
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft CREME;
+GMAT CREME.DateFormat = UTCGregorian;
+GMAT CREME.Epoch = '01 Jan 2023 00:00:00.000';
+GMAT CREME.CoordinateSystem = EarthMJ2000Eq;
+GMAT CREME.DisplayStateType = Keplerian;
+GMAT CREME.SMA = 6978.139999999978;
+GMAT CREME.ECC = 1.245890273512737e-16;
+GMAT CREME.INC = 97.8;
+GMAT CREME.RAAN = 190.0962;
+GMAT CREME.AOP = 0;
+GMAT CREME.TA = 0.1000000000038442;
+GMAT CREME.DryMass = 4;
+GMAT CREME.Cd = 2.2;
+GMAT CREME.Cr = 1.5;
+GMAT CREME.DragArea = 0.033;
+GMAT CREME.SRPArea = 0.033;
+GMAT CREME.SPADDragScaleFactor = 1;
+GMAT CREME.SPADSRPScaleFactor = 1;
+GMAT CREME.NAIFId = -10002001;
+GMAT CREME.NAIFIdReferenceFrame = -9002001;
+GMAT CREME.OrbitColor = Green;
+GMAT CREME.TargetColor = LightGray;
+GMAT CREME.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT CREME.CdSigma = 1e+70;
+GMAT CREME.CrSigma = 1e+70;
+GMAT CREME.Id = 'SatId';
+GMAT CREME.Attitude = CoordinateSystemFixed;
+GMAT CREME.SPADSRPInterpolationMethod = Bilinear;
+GMAT CREME.SPADSRPScaleFactorSigma = 1e+70;
+GMAT CREME.SPADDragInterpolationMethod = Bilinear;
+GMAT CREME.SPADDragScaleFactorSigma = 1e+70;
+GMAT CREME.ModelFile = 'aura.3ds';
+GMAT CREME.ModelOffsetX = 0;
+GMAT CREME.ModelOffsetY = 0;
+GMAT CREME.ModelOffsetZ = 0;
+GMAT CREME.ModelRotationX = 0;
+GMAT CREME.ModelRotationY = 0;
+GMAT CREME.ModelRotationZ = 0;
+GMAT CREME.ModelScale = 1;
+GMAT CREME.AttitudeDisplayStateType = 'Quaternion';
+GMAT CREME.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT CREME.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT CREME.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- GroundStations
+%----------------------------------------
+
+Create GroundStation toulouse;
+GMAT toulouse.OrbitColor = Thistle;
+GMAT toulouse.TargetColor = DarkGray;
+GMAT toulouse.CentralBody = Earth;
+GMAT toulouse.StateType = Spherical;
+GMAT toulouse.HorizonReference = Ellipsoid;
+GMAT toulouse.Location1 = 43.604652;
+GMAT toulouse.Location2 = 1.444209;
+GMAT toulouse.Location3 = 0.2;
+GMAT toulouse.Id = 'StationId';
+GMAT toulouse.IonosphereModel = 'None';
+GMAT toulouse.TroposphereModel = 'None';
+GMAT toulouse.DataSource = 'Constant';
+GMAT toulouse.Temperature = 295.1;
+GMAT toulouse.Pressure = 1013.5;
+GMAT toulouse.Humidity = 55;
+GMAT toulouse.MinimumElevationAngle = 5;
+
+
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel keplerian_poliastro_ForceModel;
+GMAT keplerian_poliastro_ForceModel.CentralBody = Earth;
+GMAT keplerian_poliastro_ForceModel.PrimaryBodies = {Earth};
+GMAT keplerian_poliastro_ForceModel.Drag = None;
+GMAT keplerian_poliastro_ForceModel.SRP = Off;
+GMAT keplerian_poliastro_ForceModel.RelativisticCorrection = Off;
+GMAT keplerian_poliastro_ForceModel.ErrorControl = None;
+GMAT keplerian_poliastro_ForceModel.GravityField.Earth.Degree = 1;
+GMAT keplerian_poliastro_ForceModel.GravityField.Earth.Order = 0;
+GMAT keplerian_poliastro_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT keplerian_poliastro_ForceModel.GravityField.Earth.PotentialFile = 'EGM96.cof';
+GMAT keplerian_poliastro_ForceModel.GravityField.Earth.TideModel = 'None';
+
+Create ForceModel keplerian_tudatpy_ForceModel;
+GMAT keplerian_tudatpy_ForceModel.CentralBody = Earth;
+GMAT keplerian_tudatpy_ForceModel.PrimaryBodies = {Earth};
+GMAT keplerian_tudatpy_ForceModel.Drag = None;
+GMAT keplerian_tudatpy_ForceModel.SRP = Off;
+GMAT keplerian_tudatpy_ForceModel.RelativisticCorrection = Off;
+GMAT keplerian_tudatpy_ForceModel.ErrorControl = None;
+GMAT keplerian_tudatpy_ForceModel.GravityField.Earth.Degree = 1;
+GMAT keplerian_tudatpy_ForceModel.GravityField.Earth.Order = 0;
+GMAT keplerian_tudatpy_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT keplerian_tudatpy_ForceModel.GravityField.Earth.PotentialFile = 'EGM96.cof';
+GMAT keplerian_tudatpy_ForceModel.GravityField.Earth.TideModel = 'None';
+
+Create ForceModel earthZonalJ3_ForceModel;
+GMAT earthZonalJ3_ForceModel.CentralBody = Earth;
+GMAT earthZonalJ3_ForceModel.PrimaryBodies = {Earth};
+GMAT earthZonalJ3_ForceModel.Drag = None;
+GMAT earthZonalJ3_ForceModel.SRP = Off;
+GMAT earthZonalJ3_ForceModel.RelativisticCorrection = Off;
+GMAT earthZonalJ3_ForceModel.ErrorControl = None;
+GMAT earthZonalJ3_ForceModel.GravityField.Earth.Degree = 3;
+GMAT earthZonalJ3_ForceModel.GravityField.Earth.Order = 0;
+GMAT earthZonalJ3_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT earthZonalJ3_ForceModel.GravityField.Earth.PotentialFile = 'EGM96.cof';
+GMAT earthZonalJ3_ForceModel.GravityField.Earth.TideModel = 'None';
+
+Create ForceModel earthZonalJ5_ForceModel;
+GMAT earthZonalJ5_ForceModel.CentralBody = Earth;
+GMAT earthZonalJ5_ForceModel.PrimaryBodies = {Earth};
+GMAT earthZonalJ5_ForceModel.Drag = None;
+GMAT earthZonalJ5_ForceModel.SRP = Off;
+GMAT earthZonalJ5_ForceModel.RelativisticCorrection = Off;
+GMAT earthZonalJ5_ForceModel.ErrorControl = None;
+GMAT earthZonalJ5_ForceModel.GravityField.Earth.Degree = 5;
+GMAT earthZonalJ5_ForceModel.GravityField.Earth.Order = 0;
+GMAT earthZonalJ5_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT earthZonalJ5_ForceModel.GravityField.Earth.PotentialFile = 'EGM96.cof';
+GMAT earthZonalJ5_ForceModel.GravityField.Earth.TideModel = 'None';
+
+Create ForceModel complete_poliastro_ForceModel;
+GMAT complete_poliastro_ForceModel.CentralBody = Earth;
+GMAT complete_poliastro_ForceModel.PrimaryBodies = {Earth};
+GMAT complete_poliastro_ForceModel.PointMasses = {Luna, Sun};
+GMAT complete_poliastro_ForceModel.SRP = On;
+GMAT complete_poliastro_ForceModel.RelativisticCorrection = Off;
+GMAT complete_poliastro_ForceModel.ErrorControl = None;
+GMAT complete_poliastro_ForceModel.GravityField.Earth.Degree = 3;
+GMAT complete_poliastro_ForceModel.GravityField.Earth.Order = 0;
+GMAT complete_poliastro_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT complete_poliastro_ForceModel.GravityField.Earth.PotentialFile = 'EGM96.cof';
+GMAT complete_poliastro_ForceModel.GravityField.Earth.TideModel = 'None';
+GMAT complete_poliastro_ForceModel.SRP.Flux = 1367;
+GMAT complete_poliastro_ForceModel.SRP.SRPModel = Spherical;
+GMAT complete_poliastro_ForceModel.SRP.Nominal_Sun = 149597870.691;
+GMAT complete_poliastro_ForceModel.Drag.AtmosphereModel = JacchiaRoberts;
+GMAT complete_poliastro_ForceModel.Drag.HistoricWeatherSource = 'ConstantFluxAndGeoMag';
+GMAT complete_poliastro_ForceModel.Drag.PredictedWeatherSource = 'ConstantFluxAndGeoMag';
+GMAT complete_poliastro_ForceModel.Drag.CSSISpaceWeatherFile = 'SpaceWeather-All-v1.2.txt';
+GMAT complete_poliastro_ForceModel.Drag.SchattenFile = 'SchattenPredict.txt';
+GMAT complete_poliastro_ForceModel.Drag.F107 = 150;
+GMAT complete_poliastro_ForceModel.Drag.F107A = 150;
+GMAT complete_poliastro_ForceModel.Drag.MagneticIndex = 3;
+GMAT complete_poliastro_ForceModel.Drag.SchattenErrorModel = 'Nominal';
+GMAT complete_poliastro_ForceModel.Drag.SchattenTimingModel = 'NominalCycle';
+GMAT complete_poliastro_ForceModel.Drag.DragModel = 'Spherical';
+
+Create ForceModel complete_tudatpy_ForceModel;
+GMAT complete_tudatpy_ForceModel.CentralBody = Earth;
+GMAT complete_tudatpy_ForceModel.PrimaryBodies = {Earth};
+GMAT complete_tudatpy_ForceModel.PointMasses = {Luna, Sun};
+GMAT complete_tudatpy_ForceModel.SRP = On;
+GMAT complete_tudatpy_ForceModel.RelativisticCorrection = Off;
+GMAT complete_tudatpy_ForceModel.ErrorControl = None;
+GMAT complete_tudatpy_ForceModel.GravityField.Earth.Degree = 15;
+GMAT complete_tudatpy_ForceModel.GravityField.Earth.Order = 15;
+GMAT complete_tudatpy_ForceModel.GravityField.Earth.StmLimit = 100;
+GMAT complete_tudatpy_ForceModel.GravityField.Earth.PotentialFile = 'EGM96.cof';
+GMAT complete_tudatpy_ForceModel.GravityField.Earth.TideModel = 'None';
+GMAT complete_tudatpy_ForceModel.SRP.Flux = 1367;
+GMAT complete_tudatpy_ForceModel.SRP.SRPModel = Spherical;
+GMAT complete_tudatpy_ForceModel.SRP.Nominal_Sun = 149597870.691;
+GMAT complete_tudatpy_ForceModel.Drag.AtmosphereModel = MSISE90;
+GMAT complete_tudatpy_ForceModel.Drag.HistoricWeatherSource = 'ConstantFluxAndGeoMag';
+GMAT complete_tudatpy_ForceModel.Drag.PredictedWeatherSource = 'ConstantFluxAndGeoMag';
+GMAT complete_tudatpy_ForceModel.Drag.CSSISpaceWeatherFile = 'SpaceWeather-All-v1.2.txt';
+GMAT complete_tudatpy_ForceModel.Drag.SchattenFile = 'SchattenPredict.txt';
+GMAT complete_tudatpy_ForceModel.Drag.F107 = 150;
+GMAT complete_tudatpy_ForceModel.Drag.F107A = 150;
+GMAT complete_tudatpy_ForceModel.Drag.MagneticIndex = 3;
+GMAT complete_tudatpy_ForceModel.Drag.SchattenErrorModel = 'Nominal';
+GMAT complete_tudatpy_ForceModel.Drag.SchattenTimingModel = 'NominalCycle';
+GMAT complete_tudatpy_ForceModel.Drag.DragModel = 'Spherical';
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator keplerian_poliastro;
+GMAT keplerian_poliastro.FM = keplerian_poliastro_ForceModel;
+GMAT keplerian_poliastro.Type = PrinceDormand853;
+GMAT keplerian_poliastro.InitialStepSize = 10;
+GMAT keplerian_poliastro.Accuracy = 9.999999999999999e-12;
+GMAT keplerian_poliastro.MinStep = 10;
+GMAT keplerian_poliastro.MaxStep = 10;
+GMAT keplerian_poliastro.MaxStepAttempts = 50;
+GMAT keplerian_poliastro.StopIfAccuracyIsViolated = true;
+
+Create Propagator keplerian_tudatpy;
+GMAT keplerian_tudatpy.FM = keplerian_tudatpy_ForceModel;
+GMAT keplerian_tudatpy.Type = PrinceDormand78;
+GMAT keplerian_tudatpy.InitialStepSize = 10;
+GMAT keplerian_tudatpy.Accuracy = 9.999999999999999e-12;
+GMAT keplerian_tudatpy.MinStep = 10;
+GMAT keplerian_tudatpy.MaxStep = 10;
+GMAT keplerian_tudatpy.MaxStepAttempts = 50;
+GMAT keplerian_tudatpy.StopIfAccuracyIsViolated = true;
+
+Create Propagator earthZonalJ3;
+GMAT earthZonalJ3.FM = earthZonalJ3_ForceModel;
+GMAT earthZonalJ3.Type = PrinceDormand853;
+GMAT earthZonalJ3.InitialStepSize = 10;
+GMAT earthZonalJ3.Accuracy = 9.999999999999999e-12;
+GMAT earthZonalJ3.MinStep = 10;
+GMAT earthZonalJ3.MaxStep = 10;
+GMAT earthZonalJ3.MaxStepAttempts = 50;
+GMAT earthZonalJ3.StopIfAccuracyIsViolated = true;
+
+Create Propagator earthZonalJ5;
+GMAT earthZonalJ5.FM = earthZonalJ5_ForceModel;
+GMAT earthZonalJ5.Type = PrinceDormand78;
+GMAT earthZonalJ5.InitialStepSize = 10;
+GMAT earthZonalJ5.Accuracy = 9.999999999999999e-12;
+GMAT earthZonalJ5.MinStep = 10;
+GMAT earthZonalJ5.MaxStep = 10;
+GMAT earthZonalJ5.MaxStepAttempts = 50;
+GMAT earthZonalJ5.StopIfAccuracyIsViolated = true;
+
+Create Propagator complete_poliastro;
+GMAT complete_poliastro.FM = complete_poliastro_ForceModel;
+GMAT complete_poliastro.Type = PrinceDormand853;
+GMAT complete_poliastro.InitialStepSize = 10;
+GMAT complete_poliastro.Accuracy = 9.999999999999999e-12;
+GMAT complete_poliastro.MinStep = 10;
+GMAT complete_poliastro.MaxStep = 10;
+GMAT complete_poliastro.MaxStepAttempts = 50;
+GMAT complete_poliastro.StopIfAccuracyIsViolated = true;
+
+Create Propagator complete_tudatpy;
+GMAT complete_tudatpy.FM = complete_tudatpy_ForceModel;
+GMAT complete_tudatpy.Type = PrinceDormand78;
+GMAT complete_tudatpy.InitialStepSize = 10;
+GMAT complete_tudatpy.Accuracy = 9.999999999999999e-12;
+GMAT complete_tudatpy.MinStep = 10;
+GMAT complete_tudatpy.MaxStep = 10;
+GMAT complete_tudatpy.MaxStepAttempts = 50;
+GMAT complete_tudatpy.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- EventLocators
+%----------------------------------------
+
+Create EclipseLocator EclipseLocator1;
+GMAT EclipseLocator1.Spacecraft = CREME;
+GMAT EclipseLocator1.Filename = 'EclipseLocator1.txt';
+GMAT EclipseLocator1.OccultingBodies = {Earth, Luna};
+GMAT EclipseLocator1.InputEpochFormat = 'TAIModJulian';
+GMAT EclipseLocator1.InitialEpoch = '21545';
+GMAT EclipseLocator1.StepSize = 10;
+GMAT EclipseLocator1.FinalEpoch = '21545.138';
+GMAT EclipseLocator1.UseLightTimeDelay = true;
+GMAT EclipseLocator1.UseStellarAberration = true;
+GMAT EclipseLocator1.WriteReport = true;
+GMAT EclipseLocator1.RunMode = Automatic;
+GMAT EclipseLocator1.UseEntireInterval = true;
+GMAT EclipseLocator1.EclipseTypes = {'Umbra', 'Penumbra', 'Antumbra'};
+
+Create ContactLocator ContactLocator1;
+GMAT ContactLocator1.Target = CREME;
+GMAT ContactLocator1.Filename = 'ContactLocator1.txt';
+GMAT ContactLocator1.InputEpochFormat = 'TAIModJulian';
+GMAT ContactLocator1.InitialEpoch = '21545';
+GMAT ContactLocator1.StepSize = 10;
+GMAT ContactLocator1.FinalEpoch = '21545.138';
+GMAT ContactLocator1.UseLightTimeDelay = true;
+GMAT ContactLocator1.UseStellarAberration = true;
+GMAT ContactLocator1.WriteReport = true;
+GMAT ContactLocator1.RunMode = Automatic;
+GMAT ContactLocator1.UseEntireInterval = true;
+GMAT ContactLocator1.Observers = {toulouse};
+GMAT ContactLocator1.LightTimeDirection = Transmit;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView DefaultOrbitView;
+GMAT DefaultOrbitView.SolverIterations = Current;
+GMAT DefaultOrbitView.UpperLeft = [ 0 0 ];
+GMAT DefaultOrbitView.Size = [ 0.5 0.9654761904761905 ];
+GMAT DefaultOrbitView.RelativeZOrder = 306;
+GMAT DefaultOrbitView.Maximized = false;
+GMAT DefaultOrbitView.Add = {CREME, Earth};
+GMAT DefaultOrbitView.CoordinateSystem = EarthMJ2000Eq;
+GMAT DefaultOrbitView.DrawObject = [ true true ];
+GMAT DefaultOrbitView.DataCollectFrequency = 1;
+GMAT DefaultOrbitView.UpdatePlotFrequency = 50;
+GMAT DefaultOrbitView.NumPointsToRedraw = 0;
+GMAT DefaultOrbitView.ShowPlot = true;
+GMAT DefaultOrbitView.MaxPlotPoints = 20000;
+GMAT DefaultOrbitView.ShowLabels = true;
+GMAT DefaultOrbitView.ViewPointReference = Earth;
+GMAT DefaultOrbitView.ViewPointVector = [ 30000 0 0 ];
+GMAT DefaultOrbitView.ViewDirection = Earth;
+GMAT DefaultOrbitView.ViewScaleFactor = 1;
+GMAT DefaultOrbitView.ViewUpCoordinateSystem = EarthMJ2000Eq;
+GMAT DefaultOrbitView.ViewUpAxis = Z;
+GMAT DefaultOrbitView.EclipticPlane = Off;
+GMAT DefaultOrbitView.XYPlane = On;
+GMAT DefaultOrbitView.WireFrame = Off;
+GMAT DefaultOrbitView.Axes = On;
+GMAT DefaultOrbitView.Grid = Off;
+GMAT DefaultOrbitView.SunLine = Off;
+GMAT DefaultOrbitView.UseInitialView = On;
+GMAT DefaultOrbitView.StarCount = 7000;
+GMAT DefaultOrbitView.EnableStars = On;
+GMAT DefaultOrbitView.EnableConstellations = On;
+
+Create GroundTrackPlot DefaultGroundTrackPlot;
+GMAT DefaultGroundTrackPlot.SolverIterations = Current;
+GMAT DefaultGroundTrackPlot.UpperLeft = [ 0 0.4559523809523809 ];
+GMAT DefaultGroundTrackPlot.Size = [ 0.5 0.4380952380952381 ];
+GMAT DefaultGroundTrackPlot.RelativeZOrder = 12;
+GMAT DefaultGroundTrackPlot.Maximized = false;
+GMAT DefaultGroundTrackPlot.Add = {CREME, toulouse};
+GMAT DefaultGroundTrackPlot.DataCollectFrequency = 1;
+GMAT DefaultGroundTrackPlot.UpdatePlotFrequency = 50;
+GMAT DefaultGroundTrackPlot.NumPointsToRedraw = 0;
+GMAT DefaultGroundTrackPlot.ShowPlot = true;
+GMAT DefaultGroundTrackPlot.MaxPlotPoints = 20000;
+GMAT DefaultGroundTrackPlot.CentralBody = Earth;
+GMAT DefaultGroundTrackPlot.TextureMap = 'ModifiedBlueMarble.jpg';
+
+Create XYPlot XYPlot1;
+GMAT XYPlot1.SolverIterations = Current;
+GMAT XYPlot1.UpperLeft = [ 0.4723529411764706 0.2476190476190476 ];
+GMAT XYPlot1.Size = [ 0.5 0.45 ];
+GMAT XYPlot1.RelativeZOrder = 17;
+GMAT XYPlot1.Maximized = false;
+GMAT XYPlot1.XVariable = CREME.ElapsedDays;
+GMAT XYPlot1.YVariables = {CREME.Earth.Altitude};
+GMAT XYPlot1.ShowGrid = true;
+GMAT XYPlot1.ShowPlot = true;
+
+Create ReportFile ReportFile1;
+GMAT ReportFile1.SolverIterations = Current;
+GMAT ReportFile1.UpperLeft = [ 0 0 ];
+GMAT ReportFile1.Size = [ 0 0 ];
+GMAT ReportFile1.RelativeZOrder = 0;
+GMAT ReportFile1.Maximized = false;
+GMAT ReportFile1.Filename = 'D:\a.muller\Documents\GitHub\2022_muller_arnaud\gmat\results\output.txt';
+GMAT ReportFile1.Precision = 16;
+GMAT ReportFile1.Add = {CREME.ElapsedSecs, CREME.EarthMJ2000Eq.X, CREME.EarthMJ2000Eq.Y, CREME.EarthMJ2000Eq.Z, CREME.EarthMJ2000Eq.VX, CREME.EarthMJ2000Eq.VY, CREME.EarthMJ2000Eq.VZ, CREME.Earth.SMA, CREME.Earth.ECC, CREME.EarthMJ2000Eq.INC, CREME.EarthMJ2000Eq.AOP, CREME.EarthMJ2000Eq.RAAN, CREME.Earth.TA, CREME.EarthFixed.X, CREME.EarthFixed.Y, CREME.EarthFixed.Z, CREME.EarthFixed.VX, CREME.EarthFixed.VY, CREME.EarthFixed.VZ};
+GMAT ReportFile1.WriteHeaders = false;
+GMAT ReportFile1.LeftJustify = On;
+GMAT ReportFile1.ZeroFill = Off;
+GMAT ReportFile1.FixedWidth = true;
+GMAT ReportFile1.Delimiter = ' ';
+GMAT ReportFile1.ColumnWidth = 23;
+GMAT ReportFile1.WriteReport = true;
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Propagate complete_tudatpy(CREME) {CREME.Earth.Altitude = 105, CREME.ElapsedSecs = 600, StopTolerance = 1};

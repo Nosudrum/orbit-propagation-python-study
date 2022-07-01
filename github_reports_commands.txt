@@ -1,0 +1,29 @@
+<details>
+
+<summary> conda info -a </summary>
+
+```bash
+
+```
+
+</details>
+
+<details>
+
+<summary> conda list </summary>
+
+```bash
+
+```
+
+</details>
+
+<details>
+
+<summary> pip freeze </summary>
+
+```bash
+
+```
+
+</details>

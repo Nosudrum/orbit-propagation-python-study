@@ -1,0 +1,5 @@
+﻿mass, 4
+drag_coefficient, 2.2
+reflectivity_coefficient, 1.5
+drag_area, 0.033
+srp_area, 0.033

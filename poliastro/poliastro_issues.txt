@@ -1,0 +1,25 @@
+poliastro issues
+- ephemeris function for 3rd body
+	✅ unclear how orbital period parameter is used : what for sun with an earth-centered propagation
+		✅ got an answer on github
+	- errors even with properly formatted command
+		✅ bug with short durations. Either increase duration (works indeed) or use fixed position workaround (meh) for short durations
+		✅ testing if bug fixed in main branch --> yes but other bugs --> discussion ongoing on github
+
+- eclipses
+	- eclipse event only registers last crossing, not all of them
+		✅ need to use the eclipse function
+	- eclipse function not documented in poliastro, comes from a 1965 book impossible to find online, only in paper
+		✅ got pictures of the book by a friend in germany whose university library has a paper copy
+		✅ figured out implementation
+
+- communication windows
+	✅ no ECEF coordinates in poliastro to compute it directly with same code used for tudatpy
+		✅ looking at conversions with other libraries --> convert to ITRS with astropy
+	✅ ECI frame used in poliastro not well documented
+		✅ comment by dev on a github issue says GCRS
+
+- output
+	- no keplerian parameters output
+		✅ implemented rv2coe function with corrections to match usual format
+	
