@@ -1,5 +1,10 @@
 # 2022 MULLER Arnaud - Research Internship
 
+## Final Article
+
+The article written as part of this study can be found [here](Final_Article.pdf).
+
+
 ## Table of Contents
 
 <!-- Start TOC (do not remove me) -->
