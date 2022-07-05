@@ -1,5 +1,8 @@
 # Orekit (python wrapper)
 
+This library was not investigated as part of the May-July 2022 research internship, but the following instructions are
+still provided as a quick means to get started with Orekit(py).
+
 ## Introduction
 
 [Orekit](https://www.orekit.org/) (ORbit Extrapolation KIT) is a free java library providing basic space dynamics
@@ -9,9 +12,12 @@ environment.
 
 ## Installation
 
-To install Orekit (py), the first step is to create a new conda environment and activate it
-with `conda create --name orekit-python` and `conda activate orekit-python`.
-Orekit(py) is then installed with `conda install -c conda-forge orekit`.
+You can install Orekit(py) in a new dedicated environment called *orekitpy* by navigating to this directory and running
+the following command :
+
+```
+conda env create -f orekitpy.yaml
+```
 
 ## Orekit data
 
@@ -25,7 +31,7 @@ The PyCharm IDE, developed by JetBrains, performs variable inspections in a way 
 wrapper. As such, displaying variable values automatically or on demand from the variables list will result in an error
 and the shutdown of the Java VM.
 
-To circumvent this issue, install ipython in your environment with `conda activate orekit-python`
+To circumvent this issue, install ipython in your environment with `conda activate orekitpy`
 and `conda install ipython`, and make sure that PyCharm is configured to use it for the python console.
 The **variables loading policy** must also be set to **on demand**.
 

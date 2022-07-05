@@ -1,0 +1,6 @@
+name: poliastro-main
+channels:
+  - conda-forge
+dependencies:
+  - pip
+  - git

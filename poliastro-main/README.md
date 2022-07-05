@@ -1,6 +1,4 @@
-# poliastro-main
-
-
+# poliastro (main branch)
 
 ## Introduction
 
@@ -14,26 +12,29 @@ The poliastro documentation is available [here](https://docs.poliastro.space/en/
 
 ## Installation
 
-Start by creating a new conda environment:
+You can create a new dedicated environment called *poliastro-main* by navigating to this directory and running
+the following command:
+
 ```
-conda create --name poliastro-main
+conda env create -f poliastro-main.yaml
 ```
-Activate it with
+
+Then, activate the environment with the following command:
+
 ```
 conda activate poliastro-main
 ```
-Then, install `pip` and `git` with
-```
-conda install pip git
-```
+
 Finally, you can install the main branch of poliastro in this environment with the following command:
+
 ```
 pip install git+https://github.com/poliastro/poliastro.git@main
 ```
 
-## Output CSV content
+Like with the method using a `.yaml` file, the poliastro installation step will automatically install the required
+version of python.
 
-### Main states file
+## Output CSV content
 
 The states CSV file generated with poliastro contains the following columns:
 

@@ -27,9 +27,7 @@ atomsInstall("celestlabx")
 
 ## Output CSV content
 
-### Main states file
-
-The states CSV file generated with Scilab contain the following columns:
+The CSV file generated with Scilab contain the following columns:
 
 | Columns |      0       |     1-3      |     4-6      |             7-12              |     13-15     |     16-18     |
 |---------|:------------:|:------------:|:------------:|:-----------------------------:|:-------------:|:-------------:|

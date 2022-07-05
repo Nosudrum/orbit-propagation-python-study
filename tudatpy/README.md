@@ -13,16 +13,14 @@ available [here](https://py.api.tudat.space/en/latest/).
 
 ## Installation
 
-You can install tudatpy in a new dedicated environment called *tudat-space* by navigating to this directory and running
+You can install tudatpy in a new dedicated environment called *tudatpy* by navigating to this directory and running
 the following command :
 
 ```
-conda env create -f environment.yaml
+conda env create -f tudatpy.yaml
 ```
 
 ## Output CSV content
-
-### Main states file
 
 The states CSV file generated with Tudatpy contain the following columns:
 

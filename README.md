@@ -15,9 +15,8 @@
 ## Introduction
 
 The goal of this research internship is to compare various python libraries able to perform orbit propagation of
-satellites. The best one shall be selected based on its ease of use, feature set, performance and accuracy.
-For this library, example scripts shall be written and documented to allow for quick and easy use in preliminary mission
-analysis studies.
+satellites and select the most appropriate one to be implemented in the CREME space mission design workflow based on its
+ease of use, feature set, performance and accuracy.
 
 ## Features
 
@@ -25,28 +24,23 @@ The following features are investigated:
 
 - Orbit propagation
     - Keplerian
-    - With J2 & J3 effects
+    - With J2, J3, J4+ effects
     - With drag
     - With other perturbations (+ SRP, 3rd body, etc.)
 - Eclipses prediction
-    - Penumbra
-    - Umbra
-- Communication windows prediction
-    - Visibility windows
-    - Link budgets ?
-- Attitude
-    - TBD, depends on features found
+- Ground station visibility prediction
+- Export of ECEF states
 
 ## Libraries
 
-The following libraries are investigated:
+The following libraries have been found:
 
 - ~~astropy~~ *not a library for orbit propagation*
 - poliastro
 - tudatpy
 - ~~skyfield~~ *only does SGP4 propagation*
-- ~~orbit-predictor~~ *only does SGP4 propagation*
-- ~~orbit-determinator~~ *does basic propagation, but no eclipses or communication windows prediction*
+- orbit-predictor *(mostly SGP4 propagation)*
+- Orbitdeterminator *(does basic propagation, but no eclipses or communication windows prediction)*
 - orbdetpy *(prediction of communication windows but not eclipses)*
 - Orekit python wrapper
 
@@ -62,25 +56,23 @@ Results are to be validated with the following tools:
 Abbreviations :
 
 - OP : Orbit propagation
-- EP : Eclipses prediction
-- CW : Communication windows
+- GS : Ground station
 
-| Feature                  | poliastro | tudatpy | orbdetpy | Orekit (py) |
-|--------------------------|:---------:|:-------:|:--------:|:-----------:|
-| OP - Keplerian           |     ✅     |    ✅    |    ✅     |      ✅      |
-| OP - J2                  |     ✅     |    ✅    |    ✅     |      ✅      |
-| OP - J3                  |     ✅     |    ✅    |    ✅     |      ✅      |
-| OP - J4+                 |     ❌     |    ✅    |    ✅     |      ✅      |
-| OP - Drag                |     ✅     |    ✅    |    ✅     |      ✅      |
-| OP - 3rd body            |     ✅     |    ✅    |    ✅     |      ✅      |
-| OP - SRP                 |     ✅     |    ✅    |    ✅     |      ✅      |
-| OP - SGP4                |     ❌     |    ❌    |    ❌     |      ✅      |
-| OP - Other perturbations |     ❌     |    ✅    |    ✅     |      ✅      |
-| EP - Penumbra            |     ✅     |    ✅    |    ❌     |      ✅      |
-| EP - Umbra               |     ✅     |    ✅    |    ❌     |      ✅      |
-| CW - Prediction          |     ❌     |    ~    |    ✅     |      ✅      |
-| CW - Link budgets        |     ❌     |    ❌    |    ❌     |      ❌      |
-| Attitude ?               |     ❌     |    ~    |    ❌     |      ✅      |
+| Feature                  | poliastro | Tudatpy | Orbit Predictor  | Orbitdeterminator | orbdetpy | Orekit (py) |
+|--------------------------|:---------:|:-------:|------------------|-------------------|:--------:|:-----------:|
+| Propagation language     |  Python   |   C++   | Python/C++(SGP4) | Python/C++(SGP4)  |   Java   |    Java     |
+| OP - Keplerian           |     ✅     |    ✅    | ✅                | ✅                 |    ✅     |      ✅      |
+| OP - J2                  |     ✅     |    ✅    | ✅                | ✅                 |    ✅     |      ✅      |
+| OP - J3                  |     ✅     |    ✅    | ❌                | ❌                 |    ✅     |      ✅      |
+| OP - J4+                 |     ❌     |    ✅    | ❌                | ❌                 |    ✅     |      ✅      |
+| OP - Drag                |     ✅     |    ✅    | ❌                | ✅                 |    ✅     |      ✅      |
+| OP - 3rd body            |     ✅     |    ✅    | ❌                | ❌                 |    ✅     |      ✅      |
+| OP - SRP                 |     ✅     |    ✅    | ❌                | ❌                 |    ✅     |      ✅      |
+| OP - SGP4                |     ❌     |    ❌    | ✅                | ✅                 |    ❌     |      ✅      |
+| OP - Other perturbations |     ❌     |    ✅    | ❌                | ❌                 |    ✅     |      ✅      |
+| Eclipses                 |     ✅     |    ✅    | ✅                | ❌                 |    ❌     |      ✅      |
+| GS visibility            |     ❌     |    ❌    | ❌                | ❌                 |    ✅     |      ✅      |
+| ECEF export              |     ❌     |    ✅    | ✅                | ✅                 |    ✅     |      ✅      |
 
 ## Validation tools force models
 
@@ -126,10 +118,10 @@ To compare with Celestlab (Keplerian only) and GMAT
 
 ## Models used
 
-| Feature                   | poliastro  |   tudatpy   | Orekit (py) |  Celestlab  |           GMAT            |
-|---------------------------|:----------:|:-----------:|:-----------:|:-----------:|:-------------------------:|
-| Atmospheric density model | Jacchia77  | NRLMSISE-00 |             | NRLMSISE-00 | JacchiaRoberts & MSISE-90 |
-| Earth gravity field       | J2/J3 only |   GOCO05c   |             |             |           EGM96           |
+| Feature                   | poliastro  |   Tudatpy   |  Celestlab  |           GMAT            |
+|---------------------------|:----------:|:-----------:|:-----------:|:-------------------------:|
+| Atmospheric density model | Jacchia77  | NRLMSISE-00 | NRLMSISE-00 | JacchiaRoberts & MSISE-90 |
+| Earth gravity field       | J2/J3 only |   GOCO05c   |    EGM96    |           EGM96           |
 
 
 

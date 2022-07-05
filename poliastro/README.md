@@ -12,24 +12,16 @@ The poliastro documentation is available [here](https://docs.poliastro.space/en/
 
 ## Installation
 
-Start by creating a new conda environment:
+ou can create a new dedicated environment called *poliastro-main* and install the latest stable release of poliastro by 
+navigating to this directory and running the following command:
+
 ```
-conda create --name poliastro
-```
-Activate it with
-```
-conda activate poliastro
-```
-Then, you can simply install poliastro in this environment with the following command:
-```
-conda install -c conda-forge poliastro
+conda env create -f poliastro.yaml
 ```
 
 ## Output CSV content
 
-### Main states file
-
-The states CSV file generated with poliastro contains the following columns:
+The CSV file generated with poliastro contains the following columns:
 
 | Columns |             0              |     1-3      |     4-6      |               7-12                |     13-15     |     16-18     |
 |---------|:--------------------------:|:------------:|:------------:|:---------------------------------:|:-------------:|:-------------:|

@@ -1,0 +1,5 @@
+name: orekitpy
+channels:
+  - conda-forge
+dependencies:
+  - orekit
