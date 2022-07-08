@@ -1,11 +1,7 @@
 
-# 2022 MULLER Arnaud - Research Internship
+# Orbit Propagation Python Libraries
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6797323.svg)](https://doi.org/10.5281/zenodo.6797323)
-
-## Final Article & Updated repository
-
-The article written as part of this study can be found [here](Final_Article.pdf).
+This study was started as part of a two-months research internship at [ISAE-SUPAERO](https://www.isae-supaero.fr/en/). The code & documentation from the original study are available on the [`2022-research-internship`](https://github.com/Nosudrum/orbit-propagation-python-study/tree/2022-research-internship) branch, while the article written as part of this study can be found [here](Research_Internship_Article.pdf).
 
 ## Abstract
 
