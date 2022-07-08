@@ -7,7 +7,6 @@
 
 The article written as part of this study can be found [here](Final_Article.pdf).
 
-Any further updates to this study in the future are available at the following repository: [Nosudrum/orbit-propagation-python-study](https://github.com/Nosudrum/orbit-propagation-python-study).
 ## Abstract
 
 As part of an effort to streamline the space mission design workflow of the CREME
