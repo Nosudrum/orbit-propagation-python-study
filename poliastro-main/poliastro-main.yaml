@@ -2,5 +2,7 @@ name: poliastro-main
 channels:
   - conda-forge
 dependencies:
+  - numpy
+  - plotly
   - pip
   - git

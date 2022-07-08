@@ -1,7 +1,7 @@
-name: poliastro
+name: analysis
 channels:
   - conda-forge
 dependencies:
   - numpy
   - plotly
-  - poliastro
+  - pandas

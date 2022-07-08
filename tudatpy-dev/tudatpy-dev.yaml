@@ -3,6 +3,9 @@ channels:
   - conda-forge
   - tudat-team/label/dev
 dependencies:
+  - numpy
+  - plotly
+  - pyproj
   - tudatpy
   - matplotlib
   - scipy

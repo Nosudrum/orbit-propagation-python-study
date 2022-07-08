@@ -3,9 +3,21 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6797323.svg)](https://doi.org/10.5281/zenodo.6797323)
 
-## Final Article
+## Final Article & Updated repository
 
 The article written as part of this study can be found [here](Final_Article.pdf).
+
+Any further updates to this study in the future are available at the following repository: [Nosudrum/orbit-propagation-python-study](https://github.com/Nosudrum/orbit-propagation-python-study).
+## Abstract
+
+As part of an effort to streamline the space mission design workflow of the CREME
+satellite mission into a single-language process, this study provides a list of open-source
+Python libraries capable of orbit propagation and a comparison of their feature set. Two
+libraries selected as prime candidates are compared across three different force models
+with trusted reference tools based on their numerical results, computation time and
+ease of use. Both are found to be suitable options for different use cases, with faster and
+more modular computations being their strongest advantages, whereas the reference
+tools remain particularly compelling for their accessibility when used independently.
 
 
 ## Table of Contents
